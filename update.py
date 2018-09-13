@@ -12,9 +12,9 @@ try:
     local = parse(cmd("git log master").splitlines()[2][8:])
     origin = parse(cmd("git log origin/master").splitlines()[2][8:])
     if local < origin:
-        print("ORIGIN")
+        print(cmd("git pull"))
     elif local > origin:
-        print("LOCAL")
+        print(cmd("git push"))
     else:
         print("SAME")
 
