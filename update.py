@@ -1,4 +1,5 @@
 from subprocess import PIPE, run
+from dateutil.parser import parse
 import time
 
 def cmd(command):
@@ -6,9 +7,16 @@ def cmd(command):
     return result.stdout
 
 try:
-    local = cmd("git log master")
-    origin = cmd("git log origin/master")
-    print(local.splitlines()[0])
-    print(origin.splitlines()[0])    
+    cmd("git fetch")
+
+    local = parse(cmd("git log master").splitlines()[2][8:])
+    origin = parse(cmd("git log origin/master").splitlines()[2][8:])
+    if local < origin:
+        print("ORIGIN")
+    elif local > origin:
+        print("LOCAL")
+    else:
+        print("SAME")
+
 except:
     print("Something went wrong!")
