@@ -6,10 +6,9 @@ def cmd(command):
     return result.stdout
 
 try:
-    local = cmd("git log --oneline master")
-    origin = cmd("git log --oneline origin/master")
-
-    if local[0:7] != origin[0:7]:
-        print("IN")
+    local = cmd("git log master")
+    origin = cmd("git log origin/master")
+    print(local.splitlines()[0])
+    print(origin.splitlines()[0])    
 except:
     print("Something went wrong!")
