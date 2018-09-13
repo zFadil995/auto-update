@@ -17,4 +17,4 @@ while True:
             cmd("git push")
     except:
         print("Something went wrong!")
-    time.sleep(10)
+    time.sleep(300)
